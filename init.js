@@ -3,11 +3,8 @@ exports.init = ()=>{
   game.width = 924;
   game.height = 624;
   graphics = game.getContext('2d')
-  graphics.fillStyle = "black";
-  graphics.fillRect(0,0,game.width,game.height);
-  graphics.fillStyle = "#555777"
-  graphics.font = "50px Verdana"
-  graphics.fillText("Liero 2",game.width/2 -65,game.height/2-80);
+  graphics.map =  require('./engine/mapRender');
+  this.tile();
 }
 exports.loop = ()=>{
     this.update();
@@ -15,21 +12,23 @@ exports.loop = ()=>{
     window.requestAnimationFrame(this.loop)
 }
 exports.update = ()=>{
-    this.obj.x +=5;
-    this.obj.y +=5;
-    console.log(this.obj.x, this.obj.y)
-}
-exports.obj = {
-    x: 50,
-    y: 25
 }
 exports.render = (x, y)=>{
-        graphics.fillRect(this.obj.x,this.obj.y,50,50)
+    graphics.map.renderMap(this.map1)
 }
-
-
-
-
+exports.map1 = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 0, 0, 1, 0, 1, 1, 0, 1, 1],
+    [0, 1, 0, 1, 0, 1, 1, 0, 1, 1],
+    [1, 0, 0, 1, 0, 1, 1, 0, 1, 1]
+]
+exports.tile = ()=>{
+    grass = new Image();
+    sand = new Image();
+    grass.src = "./tile/grass.png";
+    sand.src = "./tile/ground.png"
+}
 /* Liero 2 
 
 1.co najpierw podstawy silnika:
@@ -44,13 +43,24 @@ exports.render = (x, y)=>{
 3.fizyka (grawitacja objectow); gravite(player, box, help everything)
 4.fizyka (niszczenie mapy);
 
+todo:
+- System dzwięku jakiś skrypt podłączony;
+- backendowy serwer z NodejS do grania przez sieć
+    - tabela wynikow
+    - granie przez internet webSocketIO
+    - importowanie map i pobieranie z serwera
+- gameplay:
+    - kampania (jak z worms ileś misji)
+    - deatchmatch - (1 vs 1) - lub online (2 vs 2)
+    - capture the flag - opcjonalnie;
 
+- effects:
+    -  particle do śmierci gracza (efekt rozprysku krwii)
+    -  particle do broni itd.;
 
+  addons:
+    - Edytor map ( o dodawania własnych tile robienie z tego mapy itd)
 
-
-
-
-
-
-
+  options of scene:
+    - edytowanie ilośći amunicji w broniach itd.; (electron więc z czytywanie z pliku pobieranie configu przez internet)
 */
