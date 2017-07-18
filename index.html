@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+  </head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <canvas id="Game" width="912" height="624" style="border:1px solid #000000;">
+  </body>
+  <script>
+    // You can also require other files to run in this process
+    let game = require('./init.js')
+    game.init();
+
+    window.requestAnimationFrame(game.loop)
+
+    
+  </script>
+</html>
